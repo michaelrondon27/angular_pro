@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, InputSignalWithTransform, input } from '@angular/core';
 
 @Component({
     selector: 'calculator-button',
@@ -12,12 +12,18 @@ import { ChangeDetectionStrategy, Component, HostBinding, input } from '@angular
 })
 export class CalculatorButtonComponent {
 
-    public isCommand = input(false, {
+    public isCommand: InputSignalWithTransform<boolean, string | boolean> = input<boolean, string | boolean>(false, {
+        transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value
+    });
+    public isDoubleSize: InputSignalWithTransform<boolean, string | boolean> = input<boolean, string | boolean>(false, {
         transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value
     });
 
-    @HostBinding('class.is-command') get commandStyle() {
-        return this.isCommand;
+    // @HostBinding('class.is-command') get commandStyle(): boolean {
+    //     return this.isCommand();
+    // }
+    @HostBinding('class.w-2/4') get doubleSizeStyle(): boolean {
+        return this.isDoubleSize();
     }
 
 }
