@@ -29,7 +29,7 @@ export class CalculatorComponent {
     public calculatorButtons: Signal<readonly CalculatorButtonComponent[]> = viewChildren(CalculatorButtonComponent);
 
     handleClick(key: string): void {
-        console.log(key)
+        this.calculatorService.constructNumber(key);
     }
 
     handleKeyboardEvent(event: KeyboardEvent): void {

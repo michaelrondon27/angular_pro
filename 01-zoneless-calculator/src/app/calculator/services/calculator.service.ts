@@ -52,17 +52,56 @@ export class CalculatorService {
             return;
         }
 
+        if (this.resultText.length >= 10) {
+            return;
+        }
+
         if (value === '.' && !this.resultText().includes('.')) {
             if (this.resultText() === '0' || this.resultText() === '') {
-                this.resultText.update((text: string) => text + '0.');
+                this.resultText.set('0.');
+
+                return;
             }
+
+            this.resultText.update((text: string) => text + '.');
 
             return;
         }
 
-        this.resultText.update((text: string) => text + '.');
+        if (value === '0' && (this.resultText() === '0' || this.resultText() === '-0')) {
+            return;
+        }
 
-        return;
+        if (value === '+/-') {
+            if (this.resultText().includes('-')) {
+                this.resultText.update((text: string) => text.slice(1));
+
+                return;
+            }
+
+            this.resultText.update((text: string) => '-' + text);
+
+            return;
+        }
+
+        if (numbers.includes(value)) {
+            if (this.resultText() === '0') {
+                this.resultText.set(value);
+
+                return;
+            }
+
+            if (this.resultText() === '-0') {
+                this.resultText.set('-' + value)
+
+                return
+            }
+
+            this.resultText.update((text: string) => text + value);
+
+            return;
+        }
+
     }
 
 }
