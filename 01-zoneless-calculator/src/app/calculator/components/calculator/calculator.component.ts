@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, viewChildren } from '@angular/core';
 
 // Components
 import { CalculatorButtonComponent } from '../calculator-button/calculator-button.component';
@@ -17,12 +17,28 @@ import { CalculatorButtonComponent } from '../calculator-button/calculator-butto
 })
 export class CalculatorComponent {
 
+    public calculatorButtons: Signal<readonly CalculatorButtonComponent[]> = viewChildren(CalculatorButtonComponent);
+
     handleClick(key: string): void {
         console.log(key)
     }
 
     handleKeyboardEvent(event: KeyboardEvent): void {
-        this.handleClick(event.key);
+        const keyEquivalence: Record<string, string> = {
+            Clear: 'C',
+            Enter: '=',
+            Escape: 'C',
+            '*': 'x',
+            '/': '÷'
+        };
+        const key: string = event.key;
+        const keyValue: string = keyEquivalence[key] ?? key;
+
+        this.handleClick(keyValue);
+
+        this.calculatorButtons().forEach((button: CalculatorButtonComponent) => {
+            button.handleKeyboardPressedStyle(keyValue);
+        });
     }
 
 }

@@ -7,7 +7,9 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, InputSigna
     styleUrl: './calculator-button.component.css',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: 'w-1/4 border-r border-b border-indigo-400'
+        class: 'border-r border-b border-indigo-400',
+        '[class.w-1/4]': '!isDoubleSize()',
+        '[class.w-2/4]': 'isDoubleSize()'
     }
 })
 export class CalculatorButtonComponent {
@@ -24,13 +26,6 @@ export class CalculatorButtonComponent {
     public isPressed: WritableSignal<boolean> = signal(false);
 
     public contentValue: Signal<ElementRef<HTMLButtonElement> | undefined> = viewChild<ElementRef<HTMLButtonElement>>('button');
-
-    // @HostBinding('class.is-command') get commandStyle(): boolean {
-    //     return this.isCommand();
-    // }
-    @HostBinding('class.w-2/4') get doubleSizeStyle(): boolean {
-        return this.isDoubleSize();
-    }
 
     handleClick(): void {
         if (!this.contentValue()?.nativeElement) {
