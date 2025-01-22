@@ -105,4 +105,42 @@ describe("CalculatorService", () => {
 
         expect(calculatorService.resultText()).toBe("0.0");
     });
+
+    it("should handle sign change correctly", () => {
+        calculatorService.constructNumber("1");
+        calculatorService.constructNumber("+/-");
+
+        expect(calculatorService.resultText()).toBe("-1");
+
+        calculatorService.constructNumber("+/-");
+
+        expect(calculatorService.resultText()).toBe("1");
+    });
+
+    it("should handle backspace correctly", () => {
+        calculatorService.resultText.set("123");
+        calculatorService.constructNumber("Backspace");
+
+        expect(calculatorService.resultText()).toBe("12");
+
+        calculatorService.constructNumber("Backspace");
+
+        expect(calculatorService.resultText()).toBe("1");
+
+        calculatorService.constructNumber("Backspace");
+
+        expect(calculatorService.resultText()).toBe("0");
+    });
+
+    it("should handle max length correctly", () => {
+        for (let i: number = 0; i < 10; i++) {
+            calculatorService.constructNumber("1");
+        }
+
+        expect(calculatorService.resultText().length).toBe(10);
+
+        calculatorService.constructNumber("1");
+
+        expect(calculatorService.resultText().length).toBe(10);
+    });
 });

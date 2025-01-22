@@ -44,6 +44,8 @@ export class CalculatorService {
 
             if (this.resultText().length === 1) {
                 this.resultText.set('0');
+
+                return;
             }
 
             this.resultText.update((v: string) => v.slice(0, -1));
@@ -61,7 +63,7 @@ export class CalculatorService {
             return;
         }
 
-        if (this.resultText.length >= 10) {
+        if (this.resultText().length >= 10) {
             return;
         }
 
