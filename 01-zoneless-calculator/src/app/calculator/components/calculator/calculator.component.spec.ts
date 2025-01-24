@@ -58,4 +58,19 @@ describe("CalculatorComponent", () => {
         expect(component.resultText()).toBe("123");
         expect(component.subResultText()).toBe("456");
     });
+
+    it("should have 19 calculator-button components", () => {
+        expect(component.calculatorButtons()).toBeTruthy();
+        expect(component.calculatorButtons().length).toBe(19);
+    });
+
+    it("should have 19 calculator-button components with content projection", () => {
+        const buttons: NodeListOf<Element> = compiled.querySelectorAll("calculator-button");
+
+        expect(buttons.length).toBe(19);
+        expect(buttons[0].textContent?.trim()).toBe("C");
+        expect(buttons[1].textContent?.trim()).toBe("+/-");
+        expect(buttons[2].textContent?.trim()).toBe("%");
+        expect(buttons[3].textContent?.trim()).toBe("÷");
+    });
 });
