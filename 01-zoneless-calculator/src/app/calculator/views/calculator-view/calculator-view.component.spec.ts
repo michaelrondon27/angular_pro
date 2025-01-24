@@ -4,9 +4,9 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import CalculatorViewComponent from "./calculator-view.component";
 
 describe("CalculatorViewComponent", () => {
-    let fixture  : ComponentFixture<CalculatorViewComponent>;
     let compiled : HTMLElement;
     let component: CalculatorViewComponent;
+    let fixture  : ComponentFixture<CalculatorViewComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({

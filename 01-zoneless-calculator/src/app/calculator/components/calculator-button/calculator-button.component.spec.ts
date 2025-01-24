@@ -18,9 +18,9 @@ import { CalculatorButtonComponent } from "./calculator-button.component";
 class TestHostComponent { }
 
 describe("CalculatorButtonComponent", () => {
-    let fixture  : ComponentFixture<CalculatorButtonComponent>;
     let compiled : HTMLElement;
     let component: CalculatorButtonComponent;
+    let fixture  : ComponentFixture<CalculatorButtonComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
