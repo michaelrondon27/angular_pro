@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, signal } from "@angular/core";
+import { ApplicationRef, ChangeDetectionStrategy, Component, OnDestroy, OnInit, WritableSignal, inject, signal } from "@angular/core";
+import { Subscription } from "rxjs";
 
 // Components
 import { PokemonListComponent } from "../../pokemons/components/pokemon-list/pokemon-list.component";
@@ -18,10 +19,17 @@ export default class PokemonsPageComponent implements OnInit {
 
     // public isLoading: WritableSignal<boolean> = signal<boolean>(true);
 
+    // private appRef: ApplicationRef = inject(ApplicationRef);
+    // private $appState: Subscription = this.appRef.isStable.subscribe(isStable => console.log(isStable));
+
     ngOnInit(): void {
         // setTimeout(() => {
         //     this.isLoading.set(false);
         // }, 5000);
     }
+
+    // ngOnDestroy(): void {
+    //     this.$appState.unsubscribe();
+    // }
 
 }
