@@ -5,6 +5,12 @@ import { Subscription } from "rxjs";
 import { PokemonListComponent } from "../../pokemons/components/pokemon-list/pokemon-list.component";
 import { PokemonListSkeletonComponent } from "./ui/pokemon-list-skeleton/pokemon-list-skeleton.component";
 
+// Interfaces
+import { SimplePokemon } from "../../pokemons/interfaces";
+
+// Services
+import { PokemonsService } from "../../pokemons/services/pokemons.service";
+
 @Component({
     selector: "pokemons-page",
     standalone: true,
@@ -17,12 +23,16 @@ import { PokemonListSkeletonComponent } from "./ui/pokemon-list-skeleton/pokemon
 })
 export default class PokemonsPageComponent implements OnInit {
 
+    private pokemonsService: PokemonsService = inject(PokemonsService);
+
     // public isLoading: WritableSignal<boolean> = signal<boolean>(true);
 
     // private appRef: ApplicationRef = inject(ApplicationRef);
     // private $appState: Subscription = this.appRef.isStable.subscribe(isStable => console.log(isStable));
 
     ngOnInit(): void {
+        this.loadPokemons();
+
         // setTimeout(() => {
         //     this.isLoading.set(false);
         // }, 5000);
@@ -31,5 +41,13 @@ export default class PokemonsPageComponent implements OnInit {
     // ngOnDestroy(): void {
     //     this.$appState.unsubscribe();
     // }
+
+    loadPokemons(page: number = 0): void {
+        this.pokemonsService.loadPage(page).subscribe({
+            next: (resp: SimplePokemon[]) => {
+                console.log(resp)
+            }
+        });
+    }
 
 }
