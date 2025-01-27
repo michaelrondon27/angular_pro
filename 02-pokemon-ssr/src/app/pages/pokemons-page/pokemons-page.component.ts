@@ -25,6 +25,8 @@ export default class PokemonsPageComponent implements OnInit {
 
     private pokemonsService: PokemonsService = inject(PokemonsService);
 
+    public pokemons: WritableSignal<SimplePokemon[]> = signal<SimplePokemon[]>([])
+
     // public isLoading: WritableSignal<boolean> = signal<boolean>(true);
 
     // private appRef: ApplicationRef = inject(ApplicationRef);
@@ -44,8 +46,8 @@ export default class PokemonsPageComponent implements OnInit {
 
     loadPokemons(page: number = 0): void {
         this.pokemonsService.loadPage(page).subscribe({
-            next: (resp: SimplePokemon[]) => {
-                console.log(resp)
+            next: (pokemons: SimplePokemon[]) => {
+                this.pokemons.set(pokemons);
             }
         });
     }
