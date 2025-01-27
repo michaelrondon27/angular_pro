@@ -1,5 +1,7 @@
-import { ApplicationRef, ChangeDetectionStrategy, Component, OnDestroy, OnInit, WritableSignal, inject, signal } from "@angular/core";
-import { Subscription } from "rxjs";
+import { ApplicationRef, ChangeDetectionStrategy, Component, OnDestroy, OnInit, Signal, WritableSignal, inject, signal } from "@angular/core";
+import { toSignal } from "@angular/core/rxjs-interop";
+import { ActivatedRoute, ParamMap } from "@angular/router";
+import { Subscription, map } from "rxjs";
 
 // Components
 import { PokemonListComponent } from "../../pokemons/components/pokemon-list/pokemon-list.component";
@@ -23,9 +25,17 @@ import { PokemonsService } from "../../pokemons/services/pokemons.service";
 })
 export default class PokemonsPageComponent implements OnInit {
 
+    private activatedRoute : ActivatedRoute = inject(ActivatedRoute);
     private pokemonsService: PokemonsService = inject(PokemonsService);
 
-    public pokemons: WritableSignal<SimplePokemon[]> = signal<SimplePokemon[]>([])
+    public currentPage:Signal<number | undefined> = toSignal<number | undefined>(
+        this.activatedRoute.queryParamMap.pipe(
+            map(params => params.get("page") ?? "1"),
+            map(page => (isNaN(+page)) ? 1 : +page ),
+            map(page => Math.max(1, page))
+        )
+    );
+    public pokemons   : WritableSignal<SimplePokemon[]> = signal<SimplePokemon[]>([])
 
     // public isLoading: WritableSignal<boolean> = signal<boolean>(true);
 
@@ -45,7 +55,9 @@ export default class PokemonsPageComponent implements OnInit {
     // }
 
     loadPokemons(page: number = 0): void {
-        this.pokemonsService.loadPage(page).subscribe({
+        const pageToLoad: number = this.currentPage()! + page;
+
+        this.pokemonsService.loadPage(pageToLoad).subscribe({
             next: (pokemons: SimplePokemon[]) => {
                 this.pokemons.set(pokemons);
             }
