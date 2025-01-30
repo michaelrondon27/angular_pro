@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 // Interfaces
-import { PokeAPIResponse, Result, SimplePokemon } from '../interfaces';
+import { PokeAPIResponse, Pokemon, Result, SimplePokemon } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,10 @@ export class PokemonsService {
                     return simplePokemons;
                 })
             );
+    }
+
+    loadPokemon(id: string): Observable<Pokemon> {
+        return this.httpClient.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${ id }`)
     }
 
 }
