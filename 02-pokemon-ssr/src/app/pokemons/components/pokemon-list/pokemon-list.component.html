@@ -3,7 +3,9 @@
         <pokemon-card [pokemon]="pokemon" />
     }
 
-    <div class="col-span-5 text-center border-white h-28 flex justify-center items-center">
-        No hay pokémons
-    </div>
+    @if (!pokemons().length) {
+        <div class="col-span-5 text-center border-white h-28 flex justify-center items-center">
+            No hay pokémons
+        </div>
+    }
 </div>
