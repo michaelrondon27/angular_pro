@@ -46,11 +46,9 @@ export default class PokemonsPageComponent {
     });
 
     loadPokemons(page: number = 0): void {
-        const pageToLoad: number = this.currentPage()! + page;
-
-        this.pokemonsService.loadPage(pageToLoad)
+        this.pokemonsService.loadPage(page)
             .pipe(
-                tap(() =>  this.title.setTitle(`Pokémons SSR - Page ${ this.currentPage() }`))
+                tap(() =>  this.title.setTitle(`Pokémons SSR - Page ${ page }`))
             )
             .subscribe({
                 next: (pokemons: SimplePokemon[]) => {
