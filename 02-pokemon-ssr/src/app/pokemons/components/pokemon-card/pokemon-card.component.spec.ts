@@ -38,4 +38,25 @@ describe("PokemonCardComponent", () => {
     it("should create the component", () => {
         expect(component).toBeTruthy();
     });
+
+    it("should have the SimplePokemon signal inputValue", () => {
+        expect(component.pokemon()).toEqual(mockPokemon);
+    });
+
+    it("should render the pokemon name and image correctly", () => {
+        const image: HTMLImageElement = compiled.querySelector('img')!;
+
+        expect(image).toBeDefined();
+
+        const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${ mockPokemon.id }.png`;
+
+        expect(image.src).toBe(imageUrl);
+        expect(compiled.textContent?.trim()).toBe(mockPokemon.name);
+    });
+
+    it("should have the proper ng-reflect-router-link", () => {
+        const divWithLink: HTMLDivElement = compiled.querySelector('div')!;
+
+        expect(divWithLink.attributes.getNamedItem("ng-reflect-router-link")?.value).toBe(`/pokemons,${ mockPokemon.name }`)
+    });
 });
