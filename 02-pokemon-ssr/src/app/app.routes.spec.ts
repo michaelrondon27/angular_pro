@@ -1,9 +1,11 @@
 import { Location } from "@angular/common";
-import { Router, provideRouter } from "@angular/router";
+import { DefaultExport, Route, Router, provideRouter } from "@angular/router";
 import { TestBed } from "@angular/core/testing";
 
 // Routes
 import { routes } from "./app.routes";
+import { Type } from "@angular/core";
+import { Observable } from "rxjs";
 
 describe("App Routes", () => {
     let location: Location;
@@ -36,5 +38,20 @@ describe("App Routes", () => {
         await router.navigate(["unknown-page"]);
 
         expect(location.path()).toBe("/about");
+    });
+
+    it("should load the proper component", async () => {
+        const aboutRoute: Route = routes.find((route: Route) => route.path === 'about')!;
+        const aboutComponent: any = await (aboutRoute.loadComponent!()) as any;
+
+        expect(aboutRoute).toBeDefined();
+        expect(aboutComponent.default.name).toBe("AboutPageComponent");
+
+
+        const pokemonRoute: Route = routes.find((route: Route) => route.path === 'pokemons/page/:page')!;
+        const pokemonComponent: any = await (pokemonRoute.loadComponent!()) as any;
+
+        expect(pokemonRoute).toBeDefined();
+        expect(pokemonComponent.default.name).toBe("PokemonsPageComponent");
     });
 });
