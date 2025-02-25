@@ -3,7 +3,7 @@ import { provideHttpClient } from "@angular/common/http";
 import { HttpTestingController, TestRequest, provideHttpClientTesting } from "@angular/common/http/testing";
 
 // Interfaces
-import { PokeAPIResponse, SimplePokemon } from "../interfaces";
+import { PokeAPIResponse, Pokemon, SimplePokemon } from "../interfaces";
 
 // Services
 import { PokemonsService } from "./pokemons.service";
@@ -68,5 +68,45 @@ describe("PokemonsService", () => {
         expect(req.request.method).toBe("GET");
 
         req.flush(mockPokeApiResponse);
+    });
+
+    it("should load page 5 of SimplePokemons", () => {
+        service.loadPage(5).subscribe((pokemons: SimplePokemon[]) => {
+            expect(pokemons).toEqual(expectedPokemons);
+        });
+
+        const req: TestRequest = httoMock.expectOne("https://pokeapi.co/api/v2/pokemon?offset=80&limit=20");
+
+        expect(req.request.method).toBe("GET");
+
+        req.flush(mockPokeApiResponse);
+    });
+
+    it("should load a Pokémon by ID", () => {
+        const pokemonId: string = "1";
+
+        service.loadPokemon(pokemonId).subscribe((pokemon: any) => {
+            expect(pokemon).toEqual(mockPokemon);
+        });
+
+        const req: TestRequest = httoMock.expectOne(`https://pokeapi.co/api/v2/pokemon/${ pokemonId }`);
+
+        expect(req.request.method).toBe("GET");
+
+        req.flush(mockPokemon);
+    });
+
+    it("should load a Pokémon by name", () => {
+        const pokemonName: string = "bulbasaur";
+
+        service.loadPokemon(pokemonName).subscribe((pokemon: any) => {
+            expect(pokemon).toEqual(mockPokemon);
+        });
+
+        const req: TestRequest = httoMock.expectOne(`https://pokeapi.co/api/v2/pokemon/${ pokemonName }`);
+
+        expect(req.request.method).toBe("GET");
+
+        req.flush(mockPokemon);
     });
 });
