@@ -21,5 +21,11 @@
 
     <div>
         <h3>Labels:</h3>
+
+        @if (labelsQuery.isLoading()) {
+            <p>Estamos cargando</p>
+        } @else {
+            <pre>{{ labelsQuery.data() | json }}</pre>
+        }
     </div>
 </section>
