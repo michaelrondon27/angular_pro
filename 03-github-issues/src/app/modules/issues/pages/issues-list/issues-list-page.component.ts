@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+
+// Components
+import { LabelsSelectorComponent } from '../../components/labels-selector/labels-selector.component';
+
+// Services
 import { IssuesService } from '../../services/issues.service';
 
 @Component({
@@ -8,6 +13,7 @@ import { IssuesService } from '../../services/issues.service';
     standalone: true,
     imports: [
         CommonModule,
+        LabelsSelectorComponent,
         RouterLink
     ],
     templateUrl: './issues-list-page.component.html'
