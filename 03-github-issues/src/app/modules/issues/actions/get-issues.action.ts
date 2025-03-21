@@ -5,12 +5,12 @@ import { environment } from "src/environments/environment.development";
 import { sleep } from "@helpers/sleep";
 
 // Interfaces
-import { GithubLabel } from "../interfaces";
+import { GithubLabel, GithubIssue } from "../interfaces";
 
 const BASE_URL = environment.baseUrl;
 const GITHUB_TOKEN = environment.githubToken;
 
-export const getIssues = async (): Promise<GithubLabel[]> => {
+export const getIssues = async (): Promise<GithubIssue[]> => {
     await sleep(1500);
 
     try {
@@ -22,7 +22,7 @@ export const getIssues = async (): Promise<GithubLabel[]> => {
 
         if (!resp.ok) throw "Can't load issues";
 
-        const issues: GithubLabel[] = await resp.json();
+        const issues: GithubIssue[] = await resp.json();
         console.log({issues})
 
         return issues;

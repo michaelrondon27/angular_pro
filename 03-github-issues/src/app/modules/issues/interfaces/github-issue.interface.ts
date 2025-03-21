@@ -55,6 +55,7 @@ export interface GithubIssue {
     state                    : State;
     state_reason?            : string;
     timeline_url             : string;
+    title                    : string;
     update_at                : Date;
     user                     : User;
     url                      : string;
