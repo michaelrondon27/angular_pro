@@ -36,6 +36,7 @@ export default class IssuePageComponent {
         )
     );
 
-    public issueQuery: CreateQueryResult<GithubIssue, Error> = this._issueService.issueQuery;
+    public issueQuery        : CreateQueryResult<GithubIssue, Error> = this._issueService.issueQuery;
+    public issueCoomentsQuery: CreateQueryResult<GithubIssue[], Error> = this._issueService.issueCommentsQuery;
 
 }

@@ -1,5 +1,5 @@
 // Environments
-import { environment } from "src/environments/environment.development";
+import { environment } from "src/environments/environment";
 
 // Helpers
 import { sleep } from "@helpers/sleep";
