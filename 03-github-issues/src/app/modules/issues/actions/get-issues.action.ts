@@ -10,11 +10,15 @@ import { GithubIssue, State } from "../interfaces";
 const BASE_URL = environment.baseUrl;
 const GITHUB_TOKEN = environment.githubToken;
 
-export const getIssues = async (state: State = State.All): Promise<GithubIssue[]> => {
+export const getIssues = async (seletedLabels: string[], state: State = State.All): Promise<GithubIssue[]> => {
     await sleep(1500);
 
     const params: URLSearchParams = new URLSearchParams();
     params.append('state', state);
+
+    if (seletedLabels.length) {
+        params.append('labels', seletedLabels.join(','));
+    }
 
     try {
         const resp = await fetch(`${ BASE_URL }/issues?${ params }`, {
