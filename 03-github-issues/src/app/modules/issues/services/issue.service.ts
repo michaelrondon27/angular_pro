@@ -1,5 +1,5 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
-import { injectQuery } from '@tanstack/angular-query-experimental';
+import { Injectable, WritableSignal, inject, signal } from '@angular/core';
+import { QueryClient, injectQuery } from '@tanstack/angular-query-experimental';
 
 // Actions
 import { getIssueByNumber, getIssueCommentsByNumber } from '../actions';
@@ -8,6 +8,8 @@ import { getIssueByNumber, getIssueCommentsByNumber } from '../actions';
   providedIn: 'root'
 })
 export class IssueService {
+
+    private _queryClient: QueryClient = inject(QueryClient);
 
     private _issueNumber: WritableSignal<string | null> = signal<string | null>(null);
 
@@ -25,6 +27,14 @@ export class IssueService {
 
     setIssueNumber(issueNumber: string): void {
         this._issueNumber.set(issueNumber);
+    }
+
+    prefetchIssue(issueNumber: string): void {
+        this._queryClient.prefetchQuery({
+            queryKey: ['issue', issueNumber],
+            queryFn: () => getIssueByNumber(issueNumber),
+            staleTime: 1000 * 60 * 5
+        });
     }
 
 }
