@@ -37,7 +37,6 @@ describe('GetIssueByNumber action', () => {
     });
 
     it('should not fetch issue successfully', async () => {
-        const requestURL: string = `${ BASE_URL }/issues/${ issueNumber }`;
         const issueResponse: Response = new Response(null, {
             status: 404,
             statusText: 'Not Found'
