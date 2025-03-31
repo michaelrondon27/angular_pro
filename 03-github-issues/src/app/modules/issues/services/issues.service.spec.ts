@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { QueryClient, provideTanStackQuery } from '@tanstack/angular-query-experimental';
 
+// Interfaces
+import { State } from '../interfaces';
+
 // Services}
 import { IssuesService } from './issues.service';
 
@@ -40,5 +43,26 @@ describe('IssuesService', () => {
         expect(typeof label.name).toBe('string');
         expect(typeof label.node_id).toBe('string');
         expect(typeof label.url).toBe('string');
+    });
+
+    it('should set selected state, OPEN, CLOSED, ALL', async () => {
+        issuesService.showIssuesByState(State.Closed);
+
+        expect(issuesService.selectedState()).toBe(State.Closed);
+
+        const { data } = await issuesService.issuesQuery.refetch();
+
+        data?.forEach(issue => {
+            expect(issue.state).toBe(State.Closed);
+        });
+
+        issuesService.showIssuesByState(State.Open);
+
+        const { data: dataOpen } = await issuesService.issuesQuery.refetch();
+
+        dataOpen?.forEach(issue => {
+            expect(issue.state).toBe(State.Open);
+        });
+
     });
 });
