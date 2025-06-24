@@ -26,7 +26,7 @@ export class LanguageSelectorComponent {
         { code: 'en', flag: '🇺🇸' },
         { code: 'es', flag: '🇪🇸' },
         { code: 'fr', flag: '🇫🇷' },
-        { code: 'it', flag: '🇮🇹' },
+        { code: 'it', flag: '🇮🇹' }
     ]);
 
     changeLanguage(event: Event) {
