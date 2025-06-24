@@ -1,0 +1,28 @@
+{
+    "changeLanguage": "Change language",
+    "plans": {
+        "basic": {
+            "description": "Basic plan description",
+            "name": "Basic Plan"
+        },
+        "enterprise": {
+            "description": "Enterprise plan description",
+            "name": "Enterprise Plan"
+        },
+        "pro": {
+            "description": "Pro plan description",
+            "name": "Pro Plan"
+        },
+        "texts": {
+            "join": "Join",
+            "limited-support": "Limited Support",
+            "online-ordering": "Online Ordering",
+            "perMonth": "per month"
+        }
+    },
+    "pricingPage": {
+        "description": "Here you can find our pricing plans",
+        "title": "Pricing"
+    },
+    "welcomeMessage": "Welcome, {{ firstName }}! How are you today?"
+}

@@ -1,0 +1,31 @@
+{
+    "changeLanguage": "Changer la langue",
+    "plans": {
+        "basic": {
+            "description": "Description du plan de base",
+            "name": "Plan de Base",
+            "price": 9.99
+        },
+        "enterprise": {
+            "description": "Description du plan entreprise",
+            "name": "Plan Entreprise",
+            "price": 30
+        },
+        "pro": {
+            "description": "Description du plan pro",
+            "name": "Plan Pro",
+            "price": 20
+        },
+        "texts": {
+            "join": "Rejoindre",
+            "limited-support": "Support limité",
+            "online-ordering": "Commandes en ligne",
+            "perMonth": "par mois"
+        }
+    },
+    "pricingPage": {
+        "description": "Ici, vous pouvez trouver nos plans tarifaires",
+        "title": "Tarification"
+    },
+    "welcomeMessage": "Bienvenue, {{ firstName }}! Comment ça va aujourd'hui?"
+}

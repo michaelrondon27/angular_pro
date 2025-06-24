@@ -1,0 +1,31 @@
+{
+    "changeLanguage": "Cambiar idioma",
+    "plans": {
+        "basic": {
+            "description": "Descripción del plan básico",
+            "name": "Plan Básico",
+            "price": 9.99
+        },
+        "enterprise": {
+            "description": "Descripción del plan empresarial",
+            "name": "Plan Empresarial",
+            "price": 30
+        },
+        "pro": {
+            "description": "Descripción del plan pro",
+            "name": "Plan Pro",
+            "price": 20
+        },
+        "texts": {
+            "join": "Unirse",
+            "limited-support": "Soporte limitado",
+            "online-ordering": "Pedidos en línea",
+            "perMonth": "por mes"
+        }
+    },
+    "pricingPage": {
+        "description": "Aquí puedes encontrar nuestros planes de precios",
+        "title": "Precios"
+    },
+    "welcomeMessage": "¡Bienvenido, {{ firstName }}! ¿Cómo estás hoy?"
+}
