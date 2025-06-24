@@ -43,7 +43,9 @@ app.get(
  */
 app.get('**', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
-    const lang = 'Español';
+    const cookies: string = headers.cookie ?? '';
+    const langCookie: string = cookies.split(';').find(cookie => cookie.includes('lang')) ?? 'lang=en';
+    const [_ , lang] = langCookie.split('=');
 
     commonEngine.render({
         bootstrap,

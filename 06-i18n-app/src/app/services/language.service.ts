@@ -9,10 +9,11 @@ export const SERVER_LANG_TOKEN: InjectionToken<string> = new InjectionToken<stri
 })
 export class LanguageService {
 
+    private _langServer      : string | null = inject(SERVER_LANG_TOKEN, { optional: true });
     private _ssrCookieService: SsrCookieService = inject(SsrCookieService);
     private _translateService: TranslateService = inject(TranslateService);
 
-    public currentLang: WritableSignal<string> = signal<string>('');
+    public currentLang: WritableSignal<string> = signal<string>(this._langServer ?? 'en');
 
     changeLang(lang: string) {
         this._ssrCookieService.set('lang', lang);

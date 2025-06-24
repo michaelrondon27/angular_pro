@@ -23,8 +23,7 @@ export class AppComponent {
     constructor(
         @Optional() @Inject(SERVER_LANG_TOKEN) langServer: string
     ) {
-        console.log({langServer})
-        const lang = this._ssrCookieService.check('lang') ? this._ssrCookieService.get('lang') : 'en';
+        const lang = langServer ?? (this._ssrCookieService.check('lang') ? this._ssrCookieService.get('lang') : 'en');
 
         this._languageService.changeLang(lang);
     }
