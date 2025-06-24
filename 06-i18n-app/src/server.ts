@@ -46,7 +46,11 @@ app.get('**', (req, res, next) => {
         documentFilePath: indexHtml,
         url: `${protocol}://${headers.host}${originalUrl}`,
         publicPath: browserDistFolder,
-        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
+        providers: [
+            { provide: APP_BASE_HREF, useValue: baseUrl },
+            { provide: 'REQUEST', useValue: req },
+            { provide: 'RESPONSE', useValue: res }
+        ]
     })
     .then((html) => res.send(html))
     .catch((err) => next(err));
@@ -58,6 +62,7 @@ app.get('**', (req, res, next) => {
  */
 if (isMainModule(import.meta.url)) {
     const port = process.env['PORT'] || 4000;
+
     app.listen(port, () => {
         console.log(`Node Express server listening on http://localhost:${port}`);
     });

@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component, WritableSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, WritableSignal, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+// Services
+import { LanguageService } from '../../services/language.service';
 
 interface Language {
     code: string;
@@ -16,11 +19,20 @@ interface Language {
 })
 export class LanguageSelectorComponent {
 
+    private _languageService: LanguageService = inject(LanguageService);
+
     public languages: WritableSignal<Language[]> = signal<Language[]>([
         { code: 'en', flag: '🇺🇸' },
         { code: 'es', flag: '🇪🇸' },
         { code: 'fr', flag: '🇫🇷' },
         { code: 'it', flag: '🇮🇹' },
     ]);
+
+    changeLanguage(event: Event) {
+        const target: HTMLSelectElement = event.target as HTMLSelectElement;
+        const lang: string = target.value;
+
+        this._languageService.changeLang(lang);
+    }
 
 }
