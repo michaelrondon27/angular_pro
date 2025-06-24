@@ -21,7 +21,8 @@ export class LanguageSelectorComponent {
 
     private _languageService: LanguageService = inject(LanguageService);
 
-    public languages: WritableSignal<Language[]> = signal<Language[]>([
+    public currentLang: WritableSignal<string> = this._languageService.currentLang;
+    public languages  : WritableSignal<Language[]> = signal<Language[]>([
         { code: 'en', flag: '🇺🇸' },
         { code: 'es', flag: '🇪🇸' },
         { code: 'fr', flag: '🇫🇷' },
