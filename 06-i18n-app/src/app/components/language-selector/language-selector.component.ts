@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, WritableSignal, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 // Services
 import { LanguageService } from '../../services/language.service';
@@ -12,7 +13,8 @@ interface Language {
 @Component({
     selector: 'app-language-selector',
     imports: [
-        CommonModule
+        CommonModule,
+        TranslateModule
     ],
     templateUrl: './language-selector.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
