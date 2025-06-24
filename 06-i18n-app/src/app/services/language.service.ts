@@ -1,6 +1,8 @@
-import { Injectable, WritableSignal, inject, signal } from '@angular/core';
+import { Injectable, InjectionToken, WritableSignal, inject, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
+
+export const SERVER_LANG_TOKEN: InjectionToken<string> = new InjectionToken<string>('SERVER_LANG_TOKEN');
 
 @Injectable({
     providedIn: 'root'

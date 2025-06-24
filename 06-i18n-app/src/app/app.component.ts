@@ -1,9 +1,9 @@
-import { Component, EffectRef, WritableSignal, effect, inject, signal } from '@angular/core';
+import { Component, Inject, Optional, WritableSignal, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
 
 // Services
-import { LanguageService } from './services/language.service';
+import { LanguageService, SERVER_LANG_TOKEN } from './services/language.service';
 
 @Component({
     selector: 'app-root',
@@ -20,10 +20,13 @@ export class AppComponent {
 
     public title: WritableSignal<string> = signal<string>('i18n-app');
 
-    cookieEffect: EffectRef = effect(() => {
+    constructor(
+        @Optional() @Inject(SERVER_LANG_TOKEN) langServer: string
+    ) {
+        console.log({langServer})
         const lang = this._ssrCookieService.check('lang') ? this._ssrCookieService.get('lang') : 'en';
 
         this._languageService.changeLang(lang);
-    });
+    }
 
 }
