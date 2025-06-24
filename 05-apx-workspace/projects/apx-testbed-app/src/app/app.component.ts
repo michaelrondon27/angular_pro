@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, WritableSignal, signal } from '@angular/core';
 
-import { ApxSideMenuComponent } from 'apx-side-menu';
+import { ApxSideMenuComponent, TitleColor } from 'apx-side-menu';
 
 @Component({
     selector: 'app-root',
@@ -12,6 +12,9 @@ import { ApxSideMenuComponent } from 'apx-side-menu';
 })
 export class AppComponent {
 
-    title = 'apx-testbed-app';
+    public TitleColor: typeof TitleColor = TitleColor;
+
+    public isAuthenticated: WritableSignal<boolean> = signal<boolean>(true);
+    public title          : WritableSignal<string> = signal<string>('apx-testbed-app');
 
 }

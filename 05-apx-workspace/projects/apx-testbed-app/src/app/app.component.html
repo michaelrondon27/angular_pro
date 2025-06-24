@@ -2,4 +2,9 @@
 
 <p>Hola de nuevo</p>
 
-<lib-apx-side-menu />
+<lib-apx-side-menu
+    [isAuthenticated]="isAuthenticated()"
+    (onSignIn)="isAuthenticated.set(true)"
+    (onSignOut)="isAuthenticated.set(false)"
+    [titleColor]="TitleColor.blue"
+/>
